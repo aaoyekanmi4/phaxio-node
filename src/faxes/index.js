@@ -99,11 +99,9 @@ module.exports = class {
             form.append(`${key}[]`, val)
           })
         } else if (key === 'file') {
-          if (val.type === 'buffer') {
-            form.append(key, formData.data, { filename: val.filename })
-          } else {
-            form.append(key, fs.createReadStream(formData[key]))
-          }
+          form.append(key, fs.createReadStream(formData[key]))
+        } else if (key === 'buffer') {
+          form.append(key, formData.data, { filename: val.filename })
         } else {
           form.append(key, formData[key])
         }
